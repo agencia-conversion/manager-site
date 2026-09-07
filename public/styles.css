@@ -1,0 +1,161 @@
+:root {
+  --bg: #090b10;
+  --panel: #10141c;
+  --line: #242b38;
+  --text: #e8edf5;
+  --muted: #8b95a8;
+  --accent: #1649ff;
+  --accent-2: #3d7bff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.mark {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  color: var(--accent-2);
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+nav a,
+.ghost,
+.cta {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+main {
+  flex: 1;
+  width: min(920px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 4rem 0 3rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0.4rem 0 1rem;
+}
+
+.kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 38rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.cta {
+  background: var(--accent);
+  color: white;
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.55rem;
+  font-weight: 500;
+}
+
+.cta:hover {
+  background: var(--accent-2);
+}
+
+.ghost {
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line);
+}
+
+.flow {
+  margin-top: 4.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--panel);
+}
+
+.flow ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.flow li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+
+.flow span {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--accent-2);
+  font-size: 0.75rem;
+}
+
+footer {
+  padding: 1.25rem 1.5rem 2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+  .flow ol {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding-top: 2.5rem;
+  }
+}
