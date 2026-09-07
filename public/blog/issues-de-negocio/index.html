@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Issues de negócio, agentes por baixo — Manager</title>
+    <meta
+      name="description"
+      content="O Manager é um control plane local: a conversa começa em linguagem de produto e os agentes executam no repo."
+    />
+    <link rel="canonical" href="https://manager-site.pages.dev/blog/issues-de-negocio/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Issues de negócio, agentes por baixo — Manager" />
+    <meta
+      property="og:description"
+      content="O Manager é um control plane local: a conversa começa em linguagem de produto e os agentes executam no repo."
+    />
+    <meta property="og:url" content="https://manager-site.pages.dev/blog/issues-de-negocio/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="article:published_time" content="2026-08-20" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="alternate" type="application/rss+xml" title="Manager — Blog" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="mark" href="/">MANAGER</a>
+      <nav aria-label="Principal">
+        <a href="/">Blog</a>
+        <a href="/sobre/">Sobre</a>
+        <a href="https://github.com/agencia-conversion/manager-site">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <a class="back" href="/">← Todos os posts</a>
+
+      <article>
+        <header class="article-header">
+          <h1>Issues de negócio, agentes por baixo</h1>
+          <p class="post-meta">
+            <time datetime="2026-08-20">20 de agosto de 2026</time>
+            <span>Conversion</span>
+            <span>5 min</span>
+          </p>
+        </header>
+
+        <div class="prose">
+          <p>
+            A maior parte das ferramentas de “AI coding” começa no diff. O Manager
+            começa na issue: o que o negócio quer, por que importa, o que está fora.
+            Código vem depois — e só com brief aprovado.
+          </p>
+
+          <h2>Control plane, não chatbot</h2>
+          <p>
+            Claude, Codex e Cursor continuam sendo os braços. O Manager é o plano de
+            controle: status da issue, estágio (brief → implement → QA → review), PRs
+            no GitHub e comentários curtos em português de negócio.
+          </p>
+          <p>
+            O daemon fica no Docker local. Sites publicados vão para o Cloudflare
+            Pages. Essa separação é deliberada: daemons não cabem na edge, e o CMS de
+            produção não é playground de agente.
+          </p>
+
+          <h2>Linguagem de produto na thread</h2>
+          <p>
+            Comentários de issue têm teto curto e proibição explícita de colar
+            stack trace, JSON de tool ou transcript. O histórico técnico vive no
+            Manager; a thread que você lê na UI fala do que mudou para o usuário.
+          </p>
+          <blockquote>
+            <p>
+              Se o comentário parece log de CI, alguém quebrou a regra. O leitor da
+              issue é quem aprova brief e preview — não quem debuga o worker.
+            </p>
+          </blockquote>
+
+          <h2>Publicar ainda é um PR</h2>
+          <p>
+            Neste site, por exemplo, um post novo é um diretório em
+            <code>public/blog/&lt;slug&gt;/</code>, entradas no índice, no RSS e no
+            sitemap. Abrir PR é publicar. Sem painel admin, sem banco, sem surpresa
+            de conteúdo fora do Git.
+          </p>
+          <pre><code>public/blog/meu-post/index.html
+# + linha no índice, rss.xml e sitemap.xml</code></pre>
+          <p>
+            Isso escala enquanto o volume editorial for baixo. Se um dia o blog
+            precisar de CMS, o brief muda — e aí sim o desenho muda com o seu aval.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <p>
+        Manager · <a href="/">Blog</a> ·
+        <a href="/sobre/">Sobre</a>
+      </p>
+    </footer>
+  </body>
+</html>

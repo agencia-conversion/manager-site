@@ -3,56 +3,98 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Manager — issues de negócio, agentes por baixo</title>
+    <title>Manager — Blog</title>
     <meta
       name="description"
-      content="Control plane local para Claude, Codex e Cursor. Brief, QA, preview Cloudflare Pages, depois produção."
+      content="Notas sobre o Manager: issues de negócio, briefs, workers, QA e preview no Cloudflare Pages."
     />
+    <link rel="canonical" href="https://manager-site.pages.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Manager — Blog" />
+    <meta
+      property="og:description"
+      content="Notas sobre o Manager: issues de negócio, briefs, workers, QA e preview no Cloudflare Pages."
+    />
+    <meta property="og:url" content="https://manager-site.pages.dev/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="alternate" type="application/rss+xml" title="Manager — Blog" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <header class="top">
-      <span class="mark">MANAGER</span>
-      <nav>
-        <a href="#fluxo">Fluxo</a>
+      <a class="mark" href="/">MANAGER</a>
+      <nav aria-label="Principal">
+        <a href="/" aria-current="page">Blog</a>
+        <a href="/sobre/">Sobre</a>
         <a href="https://github.com/agencia-conversion/manager-site">GitHub</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="hero-title">
+      <header class="page-header">
         <p class="kicker">Conversion · control plane</p>
-        <h1 id="hero-title">Issues de negócio.<br />Agentes por baixo.</h1>
+        <h1>Blog</h1>
         <p class="lede">
-          O Manager orquestra Claude, Codex e Cursor no seu repo. Você aprova o brief e o
-          preview. O resto — workers, QA Playwright, Cloudflare Pages — roda sozinho.
+          Notas sobre orquestrar Claude, Codex e Cursor com issues de negócio — brief,
+          workers, QA e preview.
         </p>
-        <div class="actions">
-          <a class="cta" href="#fluxo">Ver o fluxo</a>
-          <a class="ghost" href="https://github.com/agencia-conversion/manager-site">GitHub</a>
-        </div>
-      </section>
+      </header>
 
-      <section id="fluxo" class="flow" aria-label="Pipeline">
-        <ol>
-          <li><span>01</span> Issue de negócio</li>
-          <li><span>02</span> Briefing agents</li>
-          <li><span>03</span> Você aprova o brief</li>
-          <li><span>04</span> Workers + QA</li>
-          <li><span>05</span> Preview Cloudflare</li>
-          <li><span>06</span> Você aprova → prod</li>
-        </ol>
-      </section>
+      <ol class="post-list">
+        <li>
+          <a href="/blog/workers-qa-preview/">
+            <h2 class="post-title">Workers, QA e preview: o que roda depois do brief</h2>
+            <p class="post-meta">
+              <time datetime="2026-09-05">5 de setembro de 2026</time>
+              <span>6 min</span>
+            </p>
+            <p class="post-excerpt">
+              Depois que você aprova o brief, o Manager dispara workers, Playwright e um
+              preview no Cloudflare Pages — sem você abrir o terminal.
+            </p>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/brief-aprovado-agentes/">
+            <h2 class="post-title">Por que o brief precisa da sua aprovação</h2>
+            <p class="post-meta">
+              <time datetime="2026-09-01">1 de setembro de 2026</time>
+              <span>5 min</span>
+            </p>
+            <p class="post-excerpt">
+              Agentes escrevem o PRD; humanos liberam o escopo. O gate de brief é o ponto
+              em que o Manager deixa de adivinhar e passa a executar.
+            </p>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/issues-de-negocio/">
+            <h2 class="post-title">Issues de negócio, agentes por baixo</h2>
+            <p class="post-meta">
+              <time datetime="2026-08-20">20 de agosto de 2026</time>
+              <span>5 min</span>
+            </p>
+            <p class="post-excerpt">
+              O Manager não é mais um board de tickets técnicos. É um control plane local
+              onde a conversa começa em linguagem de produto.
+            </p>
+          </a>
+        </li>
+      </ol>
     </main>
 
     <footer>
-      <p>Manager fica no Docker local. Sites vão pro Pages. Daemons não cabem na edge.</p>
+      <p>
+        Manager · <a href="/sobre/">Sobre</a> ·
+        <a href="/rss.xml">RSS</a>
+      </p>
     </footer>
   </body>
 </html>
