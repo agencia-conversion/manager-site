@@ -1,11 +1,11 @@
 :root {
-  --bg: #090b10;
-  --panel: #10141c;
-  --line: #242b38;
-  --text: #e8edf5;
-  --muted: #8b95a8;
+  --bg: #f4f6f9;
+  --panel: #ffffff;
+  --line: #d5dbe6;
+  --text: #12151c;
+  --muted: #5c6578;
   --accent: #1649ff;
-  --accent-2: #3d7bff;
+  --accent-2: #0d3ad6;
 }
 
 * {
@@ -38,7 +38,7 @@ body {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.32em;
-  color: var(--accent-2);
+  color: var(--accent);
 }
 
 nav {
@@ -75,7 +75,7 @@ main {
 .kicker {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.75rem;
-  color: var(--accent-2);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0;
@@ -97,7 +97,7 @@ main {
 
 .cta {
   background: var(--accent);
-  color: white;
+  color: #ffffff;
   padding: 0.7rem 1.1rem;
   border-radius: 0.55rem;
   font-weight: 500;
@@ -139,7 +139,7 @@ main {
 
 .flow span {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  color: var(--accent-2);
+  color: var(--accent);
   font-size: 0.75rem;
 }
 

@@ -31,6 +31,15 @@ test("layout não estoura no viewport", async ({ page }) => {
   expect(overflow).toBeFalsy();
 });
 
+test("modo claro", async ({ page }) => {
+  await page.goto("/");
+  const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  expect(m, bg).toBeTruthy();
+  const lum = (0.2126 * Number(m![1]) + 0.7152 * Number(m![2]) + 0.0722 * Number(m![3])) / 255;
+  expect(lum).toBeGreaterThan(0.7);
+});
+
 test("CTA e GitHub não 404", async ({ page, request }) => {
   await page.goto("/");
   const cta = page.getByRole("link", { name: /ver o fluxo/i });
