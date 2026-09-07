@@ -47,6 +47,8 @@ test("CTA e GitHub não 404", async ({ page, request }) => {
     await cta.click();
     await expect(page.locator("#fluxo")).toBeVisible();
   }
-  const ghRes = await request.get(ghHref!);
+  const ghRes = await request.get(ghHref!, {
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; ManagerQA/1.0)" },
+  });
   expect(ghRes.status(), ghHref ?? "").toBeLessThan(400);
 });
