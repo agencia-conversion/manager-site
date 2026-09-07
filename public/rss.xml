@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manager — Blog</title>
+    <link>https://manager-site.pages.dev/</link>
+    <description>Notas sobre o Manager: issues de negócio, briefs, workers, QA e preview.</description>
+    <language>pt-BR</language>
+    <atom:link href="https://manager-site.pages.dev/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Workers, QA e preview: o que roda depois do brief</title>
+      <link>https://manager-site.pages.dev/blog/workers-qa-preview/</link>
+      <guid isPermaLink="true">https://manager-site.pages.dev/blog/workers-qa-preview/</guid>
+      <pubDate>Sat, 05 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Depois que você aprova o brief, o Manager dispara workers, Playwright e um preview no Cloudflare Pages — sem você abrir o terminal.</description>
+    </item>
+    <item>
+      <title>Por que o brief precisa da sua aprovação</title>
+      <link>https://manager-site.pages.dev/blog/brief-aprovado-agentes/</link>
+      <guid isPermaLink="true">https://manager-site.pages.dev/blog/brief-aprovado-agentes/</guid>
+      <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Agentes escrevem o PRD; humanos liberam o escopo. O gate de brief é o ponto em que o Manager deixa de adivinhar e passa a executar.</description>
+    </item>
+    <item>
+      <title>Issues de negócio, agentes por baixo</title>
+      <link>https://manager-site.pages.dev/blog/issues-de-negocio/</link>
+      <guid isPermaLink="true">https://manager-site.pages.dev/blog/issues-de-negocio/</guid>
+      <pubDate>Thu, 20 Aug 2026 12:00:00 GMT</pubDate>
+      <description>O Manager não é mais um board de tickets técnicos. É um control plane local onde a conversa começa em linguagem de produto.</description>
+    </item>
+  </channel>
+</rss>
