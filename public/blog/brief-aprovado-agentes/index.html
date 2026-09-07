@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Por que o brief precisa da sua aprovação — Manager</title>
+    <meta
+      name="description"
+      content="Agentes escrevem o PRD; humanos liberam o escopo. O gate de brief é onde o Manager para de adivinhar e começa a executar."
+    />
+    <link rel="canonical" href="https://manager-site.pages.dev/blog/brief-aprovado-agentes/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Por que o brief precisa da sua aprovação — Manager" />
+    <meta
+      property="og:description"
+      content="Agentes escrevem o PRD; humanos liberam o escopo. O gate de brief é onde o Manager para de adivinhar e começa a executar."
+    />
+    <meta property="og:url" content="https://manager-site.pages.dev/blog/brief-aprovado-agentes/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="article:published_time" content="2026-09-01" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="alternate" type="application/rss+xml" title="Manager — Blog" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="mark" href="/">MANAGER</a>
+      <nav aria-label="Principal">
+        <a href="/">Blog</a>
+        <a href="/sobre/">Sobre</a>
+        <a href="https://github.com/agencia-conversion/manager-site">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <a class="back" href="/">← Todos os posts</a>
+
+      <article>
+        <header class="article-header">
+          <h1>Por que o brief precisa da sua aprovação</h1>
+          <p class="post-meta">
+            <time datetime="2026-09-01">1 de setembro de 2026</time>
+            <span>Conversion</span>
+            <span>5 min</span>
+          </p>
+        </header>
+
+        <div class="prose">
+          <p>
+            Deixar um agente “só implementar” é barato no curto prazo e caro no médio.
+            Sem um PRD fechado, o worker inventa escopo, escolhe a stack errada ou
+            acopla CMS onde o brief pedia HTML estático.
+          </p>
+
+          <h2>Brief é contrato, não rascunho</h2>
+          <p>
+            No Manager, o agente de briefing escreve o PRD na issue: objetivo, premissas,
+            escopo, fora de escopo, critérios de aceite e riscos. Você lê na UI e
+            aprova — ou devolve com pergunta objetiva via bloqueio.
+          </p>
+          <p>
+            Só depois disso o estágio IMPLEMENT sobe. Workers não negociam premissa em
+            silêncio; se algo estiver ambíguo, o caminho certo é
+            <code>manager issue block</code>, não um PR surpresa.
+          </p>
+
+          <h2>O que o gate evita</h2>
+          <ul>
+            <li>CMS/Neon onde o produto pediu arquivos no repo.</li>
+            <li>Landing reescrita quando o pedido era blog.</li>
+            <li>Deploy direto sem preview revisável.</li>
+          </ul>
+          <blockquote>
+            <p>
+              Premissas explícitas no brief são o antídoto contra “o agente assumiu CMS”.
+              Se a origem do conteúdo muda, o desenho inteiro muda — e isso precisa do
+              seu aval antes do primeiro commit.
+            </p>
+          </blockquote>
+
+          <h2>Como aprovar bem</h2>
+          <ol>
+            <li>Confira premissas (estático? sem banco? identidade visual?). </li>
+            <li>Olhe os critérios de aceite: eles viram o checklist do QA.</li>
+            <li>Corte o que estiver fora de escopo em vez de “deixar para depois”.</li>
+          </ol>
+          <p>
+            Aprovou? O time é enfileirado. Recusou? O brief volta. Em ambos os casos,
+            o Manager registra a decisão na thread de negócio — sem transcript de
+            ferramenta poluindo o comentário.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <p>
+        Manager · <a href="/">Blog</a> ·
+        <a href="/sobre/">Sobre</a>
+      </p>
+    </footer>
+  </body>
+</html>

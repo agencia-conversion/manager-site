@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sobre — Manager</title>
+    <meta
+      name="description"
+      content="O Manager orquestra Claude, Codex e Cursor no seu repo. Você aprova o brief e o preview. Workers, QA e Cloudflare Pages rodam sozinhos."
+    />
+    <link rel="canonical" href="https://manager-site.pages.dev/sobre/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sobre — Manager" />
+    <meta
+      property="og:description"
+      content="O Manager orquestra Claude, Codex e Cursor no seu repo. Você aprova o brief e o preview. Workers, QA e Cloudflare Pages rodam sozinhos."
+    />
+    <meta property="og:url" content="https://manager-site.pages.dev/sobre/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="alternate" type="application/rss+xml" title="Manager — Blog" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="mark" href="/">MANAGER</a>
+      <nav aria-label="Principal">
+        <a href="/">Blog</a>
+        <a href="/sobre/" aria-current="page">Sobre</a>
+        <a href="https://github.com/agencia-conversion/manager-site">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="page-header">
+        <p class="kicker">Conversion · control plane</p>
+        <h1>Issues de negócio.<br />Agentes por baixo.</h1>
+        <p class="lede">
+          O Manager orquestra Claude, Codex e Cursor no seu repo. Você aprova o brief e o
+          preview. O resto — workers, QA Playwright, Cloudflare Pages — roda sozinho.
+        </p>
+      </header>
+
+      <div class="prose">
+        <p>
+          Não é um CMS remoto nem um daemon na edge. O control plane fica no Docker local;
+          os sites vão para o Cloudflare Pages. A conversa com o time começa em linguagem
+          de produto — não em checklist de infra.
+        </p>
+        <p>
+          Cada issue passa por um brief aprovado antes de qualquer worker escrever código.
+          Depois: implementação em PR, Playwright no desktop e no mobile, preview, e só
+          então produção.
+        </p>
+      </div>
+
+      <section class="about-panel" aria-label="Pipeline">
+        <h2>Fluxo</h2>
+        <ol>
+          <li><span>01</span> Issue de negócio</li>
+          <li><span>02</span> Briefing agents</li>
+          <li><span>03</span> Você aprova o brief</li>
+          <li><span>04</span> Workers + QA</li>
+          <li><span>05</span> Preview Cloudflare</li>
+          <li><span>06</span> Você aprova → prod</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Manager · <a href="/">Blog</a> ·
+        <a href="/rss.xml">RSS</a>
+      </p>
+    </footer>
+  </body>
+</html>
