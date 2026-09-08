@@ -1,0 +1,19 @@
+src/seed/landing.ts
+  s_275ded5ffb6b6a::t_3f799f22ede227 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "494116abd30507c3586683aaa1f13bd7878afbe4",
+  "prompts": {},
+  "sessions": {
+    "s_275ded5ffb6b6a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1d492830-b262-455d-b52d-b89556cbb665",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
