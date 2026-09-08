@@ -2,7 +2,6 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: { ignoreBuildErrors: true },
   // Playwright / QA usa 127.0.0.1; Next 16 bloqueia assets cross-origin no dev
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
@@ -14,14 +13,11 @@ const nextConfig = {
   },
   // Packages with Cloudflare Workers (workerd) specific code
   // Read more: https://opennext.js.org/cloudflare/howtos/workerd
-  serverExternalPackages: [
-    'jose',
-    'pg-cloudflare',
-    '@payloadcms/db-d1-sqlite',
-    '@payloadcms/drizzle',
-    '@payloadcms/drizzle/sqlite',
-    'drizzle-kit',
-  ],
+  // NÃO listar db-d1-sqlite/drizzle-kit aqui: no Turbopack o Next gera
+  // require("pkg-<hash>/api") e o OpenNext não resolve (payload#16470).
+  // O build usa `next build --webpack` pra aplicar webpack.externals +
+  // IgnorePlugin do withPayload e tirar drizzle-kit do bundle.
+  serverExternalPackages: ['jose', 'pg-cloudflare'],
 
   // Your Next.js config here
   webpack: (webpackConfig: any) => {
