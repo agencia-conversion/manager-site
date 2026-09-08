@@ -1,0 +1,33 @@
+next.config.ts
+  s_70dc6f8bda4c08::t_b3e992213dc0ab 1-2,5-6,34-39
+  s_a7448c8e1756dc::t_26cd29a73b6c0f 40
+package.json
+  s_70dc6f8bda4c08::t_e15247a412ad3e 11,22
+  s_70dc6f8bda4c08::t_c8e2fc785473ea 52
+tsconfig.json
+  s_70dc6f8bda4c08::t_2b88068601582d 33-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "70246336e1ea8a5046fe0864d33c37335444ff7a",
+  "prompts": {},
+  "sessions": {
+    "s_70dc6f8bda4c08": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "209d6bc6-3b60-48c7-8b40-b21dae5dc46e",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    },
+    "s_a7448c8e1756dc": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "c5cfd412-eeb4-4e02-b68c-55a83b059340",
+        "model": "composer-2.5-fast"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
