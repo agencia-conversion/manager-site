@@ -1,0 +1,64 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "manager-site",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "D1",
+      "database_id": "6482ea65-68be-4bfa-b42a-e77fc97fe55f",
+      "database_name": "manager-site",
+      "remote": true
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "manager-site"
+    }
+  ],
+  "env": {
+    "preview": {
+      "name": "manager-site-preview",
+      "d1_databases": [
+        {
+          "binding": "D1",
+          "database_id": "a81c6257-294c-48be-a3f0-95c15842a4a5",
+          "database_name": "manager-site-preview",
+          "remote": true
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2",
+          "bucket_name": "manager-site-preview"
+        }
+      ]
+    },
+    "production": {
+      "name": "manager-site",
+      "vars": {
+        "PAYLOAD_FIRST_USER_EMAIL": "admin@manager-site.local"
+      },
+      "d1_databases": [
+        {
+          "binding": "D1",
+          "database_id": "6482ea65-68be-4bfa-b42a-e77fc97fe55f",
+          "database_name": "manager-site",
+          "remote": true
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2",
+          "bucket_name": "manager-site"
+        }
+      ]
+    }
+  }
+}
