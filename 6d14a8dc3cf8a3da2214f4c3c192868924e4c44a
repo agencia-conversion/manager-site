@@ -1,0 +1,25 @@
+src/migrations/index.ts
+  s_15977532528bfc::t_acb9f72022aa24 1-2,13,15
+package.json
+  s_15977532528bfc::t_3d90c143a23ec8 51
+src/migrations/20260908_100517_landing.json
+  s_15977532528bfc::t_b43315878af75b 1256
+package-lock.json
+  s_15977532528bfc::t_07bb153c8f09b1 36,1437-1439,1454-1456,1471-1473,1488-1490,1505-1507,11694-11696,11702-11703,12287-12289,16338-16340,16351-16355,16359-16361,16369,16372,16386
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "6d14a8dc3cf8a3da2214f4c3c192868924e4c44a",
+  "prompts": {},
+  "sessions": {
+    "s_15977532528bfc": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "14c9add8-a69b-426b-9a62-3b623bb20b56",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

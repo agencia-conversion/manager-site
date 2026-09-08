@@ -1,0 +1,21 @@
+public/styles.css
+  s_71dadf1ef5dd94::t_7231b71878c4d2 2-6,8,41,78,100,142
+tests/landing.spec.ts
+  s_71dadf1ef5dd94::t_ca724662dc6933 34-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d95ce3fde02a2376ac4388fa7cbb45fe7c62bda1",
+  "prompts": {},
+  "sessions": {
+    "s_71dadf1ef5dd94": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5f96f1a5-9029-4e88-93d4-673e66680e78",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

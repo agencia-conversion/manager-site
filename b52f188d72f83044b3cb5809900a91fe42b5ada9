@@ -1,0 +1,110 @@
+src/app/(payload)/api/graphql/route.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-8
+wrangler.jsonc
+  s_048ce8899bff31::t_53a851f416f047 1-61
+src/app/(payload)/api/graphql-playground/route.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-7
+.prettierrc.json
+  s_048ce8899bff31::t_8341dc6417ea7d 1-6
+src/app/(frontend)/page.tsx
+  s_048ce8899bff31::t_32684add14247e 1,3-4,6,9-48,50-56,58-61,63-108
+  s_048ce8899bff31::t_8341dc6417ea7d 2,5,7-8,49,57,62,109-110
+src/migrations/20250929_111647.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-157
+.env.example
+  s_048ce8899bff31::t_210db01651318f 1-2
+next.config.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-4,7-30
+  s_048ce8899bff31::t_cf09d70e0ef26c 5-6
+src/app/(frontend)/styles.css
+  s_048ce8899bff31::t_8341dc6417ea7d 1,9-14,22,27-28,35-36,43,47-48,55-56,60,67,74,82-83,90,96-97,105,109,122-123,131-132,134,139,145,152,156-157,160-161
+  s_048ce8899bff31::t_455c19919eba4e 2-8,15-21,23-26,29-34,37-42,44-46,49-54,57-59,61-66,68-73,75-81,84-89,91-95,98-104,106-108,110-121,124-130,133,135-138,140-144,146-151,153-155,158-159
+src/collections/Users.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-14
+src/seed/landing.ts
+  s_048ce8899bff31::t_5a93f2a88df2fe 1-27
+open-next.config.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-4
+src/app/(frontend)/layout.tsx
+  s_048ce8899bff31::t_c0bc1c36dc34af 8-17
+  s_048ce8899bff31::t_8341dc6417ea7d 1-7,18-20
+package.json
+  s_048ce8899bff31::t_e58a39c0e30782 3,5-7,9-39,42-61
+cloudflare-env.d.ts
+  s_048ce8899bff31::t_efd371222159ea 1-3
+  s_048ce8899bff31::t_8341dc6417ea7d 4-11
+  s_048ce8899bff31::t_ceaab81cefbf33 12-12011
+src/migrations/20260908_100517_landing.json
+  s_048ce8899bff31::t_13b945d1f9a0e0 1-1257
+src/app/(payload)/admin/[[...segments]]/page.tsx
+  s_048ce8899bff31::t_8341dc6417ea7d 1-24
+public/_headers
+  s_048ce8899bff31::t_8341dc6417ea7d 1-2
+src/seed/seedLanding.ts
+  s_048ce8899bff31::t_0f284a5f48d55f 1-29
+src/collections/Media.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-20
+src/app/(payload)/admin/[[...segments]]/not-found.tsx
+  s_048ce8899bff31::t_8341dc6417ea7d 1-24
+src/app/(payload)/layout.tsx
+  s_048ce8899bff31::t_6ebcb35fc0387f 6
+  s_048ce8899bff31::t_8341dc6417ea7d 1-5,7-31
+.yarnrc
+  s_048ce8899bff31::t_8341dc6417ea7d 1
+src/migrations/index.ts
+  s_048ce8899bff31::t_13b945d1f9a0e0 1-2,10-15
+  s_048ce8899bff31::t_8341dc6417ea7d 3-9
+tsconfig.json
+  s_048ce8899bff31::t_8341dc6417ea7d 1-17,19-32,34-38,41-43,45
+  s_048ce8899bff31::t_0c3d91160ebdc9 18
+  s_048ce8899bff31::t_ea4d46f25fb83e 33
+  s_048ce8899bff31::t_6a2664b4f68b56 39-40
+  s_048ce8899bff31::t_1b782b9219a07b 44
+src/globals/Landing.ts
+  s_048ce8899bff31::t_8f2aca3b629de0 1-101
+README.md
+  s_048ce8899bff31::t_0aa4aa2ec124ca 3,5-37
+src/app/(payload)/api/[...slug]/route.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-19
+.npmrc
+  s_048ce8899bff31::t_8341dc6417ea7d 1
+src/payload-types.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-399
+eslint.config.mjs
+  s_048ce8899bff31::t_8341dc6417ea7d 1-31
+src/migrations/20260908_100517_landing.ts
+  s_048ce8899bff31::t_13b945d1f9a0e0 1-2,4-10,12-33,36-37,39-40,42-43,49-72,76-78,96-97,99-100,104
+  s_048ce8899bff31::t_56e985783edd7b 3,11,34-35,38,41,44-48,73-75,79-95,98,101-103
+.gitignore
+  s_048ce8899bff31::t_26cfb13ff76260 1-15,17-25,27-51
+  s_048ce8899bff31::t_9d3c61550d704b 16,52-53
+src/app/(payload)/admin/importMap.js
+  s_048ce8899bff31::t_58278f318a7ee9 2,5-6
+  s_048ce8899bff31::t_8341dc6417ea7d 1,3-4,7
+src/payload.config.ts
+  s_048ce8899bff31::t_8341dc6417ea7d 1-7,9-12,16-20,22-41,43-56,58-62,67,69-73,77-87
+  s_048ce8899bff31::t_104c40a7a684f0 8,13-14,21,42,57,63-66
+  s_048ce8899bff31::t_be8672a877df06 15
+  s_048ce8899bff31::t_0b9eb3db7bcd0e 68
+  s_048ce8899bff31::t_908fb9315c9f2d 74-76
+src/migrations/20250929_111647.json
+  s_048ce8899bff31::t_8341dc6417ea7d 1-655
+package-lock.json
+  s_048ce8899bff31::t_e8075aefa572b6 3,9-25,27-16198,16201-16333,16335-16345,16347-16366,16368-16375,16378-16380,16383-16394,16397-16403,16405-16885,16887-16982,16985,16988,16991-17009,17011-17017,17019,17022-17122
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b52f188d72f83044b3cb5809900a91fe42b5ada9",
+  "prompts": {},
+  "sessions": {
+    "s_048ce8899bff31": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "65842121-e78c-473a-b293-c76260850a1f",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

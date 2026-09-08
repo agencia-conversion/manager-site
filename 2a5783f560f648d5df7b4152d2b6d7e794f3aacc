@@ -1,0 +1,24 @@
+src/app/(frontend)/page.tsx
+  s_15977532528bfc::t_b7fd0d32cd904c 2,13,20,49
+src/globals/Landing.ts
+  s_15977532528bfc::t_7b4772b443eab0 12
+  s_15977532528bfc::t_23858d3e88e837 7-11,63
+src/seed/seedLanding.ts
+  s_15977532528bfc::t_0a2fc282d3afa6 27-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2a5783f560f648d5df7b4152d2b6d7e794f3aacc",
+  "prompts": {},
+  "sessions": {
+    "s_15977532528bfc": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "14c9add8-a69b-426b-9a62-3b623bb20b56",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

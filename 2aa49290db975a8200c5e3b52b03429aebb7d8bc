@@ -1,0 +1,19 @@
+scripts/fix-payload-loadenv.mjs
+  s_275ded5ffb6b6a::t_3c88002fb522a6 4-6,8-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2aa49290db975a8200c5e3b52b03429aebb7d8bc",
+  "prompts": {},
+  "sessions": {
+    "s_275ded5ffb6b6a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1d492830-b262-455d-b52d-b89556cbb665",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

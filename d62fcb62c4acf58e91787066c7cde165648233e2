@@ -1,0 +1,22 @@
+tests/blog.spec.ts
+  s_ad0e91fba870e5::t_d80df72b9898a2 79-80
+  s_ad0e91fba870e5::t_1521bdbc0123fb 3-18,21-37,40-51,53-77,83-132,140-143,148-155
+README.md
+  s_ad0e91fba870e5::t_3a22e4f59441f5 3,5-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "d62fcb62c4acf58e91787066c7cde165648233e2",
+  "prompts": {},
+  "sessions": {
+    "s_ad0e91fba870e5": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e1de35e7-fc2d-41f2-9c43-ea2cdab11aea",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
