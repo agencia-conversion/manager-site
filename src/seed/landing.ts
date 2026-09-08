@@ -24,4 +24,4 @@ export const landingSeed = {
   ],
   footer:
     'Manager fica no Docker local. Sites vão pro Pages. Daemons não cabem na edge.',
-} as const
+}
