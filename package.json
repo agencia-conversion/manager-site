@@ -36,7 +36,8 @@
     "next": "16.3.3",
     "payload": "3.82.1",
     "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react-dom": "19.2.6",
+    "wrangler": "^4.129.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
@@ -47,8 +48,7 @@
     "eslint-config-next": "16.3.3",
     "prettier": "^3.4.2",
     "tsx": "4.22.4",
-    "typescript": "^5.8.2",
-    "wrangler": "^4.129.1"
+    "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">=22"
