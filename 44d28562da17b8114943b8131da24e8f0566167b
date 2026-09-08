@@ -1,0 +1,20 @@
+cloudflare-env.d.ts
+  s_048ce8899bff31::t_efd371222159ea 9
+  s_048ce8899bff31::t_6117a692427d0f 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "44d28562da17b8114943b8131da24e8f0566167b",
+  "prompts": {},
+  "sessions": {
+    "s_048ce8899bff31": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "65842121-e78c-473a-b293-c76260850a1f",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

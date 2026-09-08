@@ -1,0 +1,14 @@
+tests/landing.spec.ts
+  h_4c37b751ef2b54 50-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "864466cb9045fc3a028879f4de0b38a80d46a4a9",
+  "prompts": {},
+  "humans": {
+    "h_4c37b751ef2b54": {
+      "author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+src/app/(frontend)/page.tsx
+  s_a1d85ad2c8ef93::t_38fa49b485ba3f 14-18
+src/payload.config.ts
+  s_a1d85ad2c8ef93::t_eae2b509d093bb 22,44-45,58-59,67-79,81,83-87,104,106-127,157
+  s_a1d85ad2c8ef93::t_c96a67bd04d8f1 46-57,60-66,80,82,88-103,105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "bed3189797b40c13ebc723afe72eb6bdb9031d67",
+  "prompts": {},
+  "sessions": {
+    "s_a1d85ad2c8ef93": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "91ef8a5f-6fa2-4dc3-9c73-1e82875246e5",
+        "model": "default"
+      },
+      "human_author": null
+    }
+  }
+}

@@ -1,0 +1,23 @@
+public/sitemap.xml
+  s_ad0e91fba870e5::t_a64dcefe650d00 1-31
+public/rss.xml
+  s_ad0e91fba870e5::t_839f1c71e384d6 1-31
+public/robots.txt
+  s_ad0e91fba870e5::t_9b3fb1052f97c4 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "55f0d6ca10db9520637cc74238a9d7314a9561aa",
+  "prompts": {},
+  "sessions": {
+    "s_ad0e91fba870e5": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e1de35e7-fc2d-41f2-9c43-ea2cdab11aea",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
