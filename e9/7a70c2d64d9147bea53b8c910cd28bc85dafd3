@@ -1,0 +1,19 @@
+tests/landing.spec.ts
+  s_15977532528bfc::t_94fffe5f79e062 61-62,67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e97a70c2d64d9147bea53b8c910cd28bc85dafd3",
+  "prompts": {},
+  "sessions": {
+    "s_15977532528bfc": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "14c9add8-a69b-426b-9a62-3b623bb20b56",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
