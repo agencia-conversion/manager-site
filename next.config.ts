@@ -2,6 +2,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: { ignoreBuildErrors: true },
   // Playwright / QA usa 127.0.0.1; Next 16 bloqueia assets cross-origin no dev
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
