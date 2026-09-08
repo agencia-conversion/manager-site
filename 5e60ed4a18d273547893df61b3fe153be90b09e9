@@ -1,0 +1,20 @@
+next.config.ts
+  s_275ded5ffb6b6a::t_3c020b052696a4 21
+  s_275ded5ffb6b6a::t_359eeebc0760ca 16-20,22-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5e60ed4a18d273547893df61b3fe153be90b09e9",
+  "prompts": {},
+  "sessions": {
+    "s_275ded5ffb6b6a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1d492830-b262-455d-b52d-b89556cbb665",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
