@@ -4,7 +4,12 @@ export const Landing: GlobalConfig = {
   slug: 'landing',
   label: 'Landing',
   access: {
-    read: () => true,
+    // Anônimo só vê published; admin autenticado lê drafts também.
+    read: ({ req: { user } }) => {
+      if (user) return true
+      return { _status: { equals: 'published' } }
+    },
+    update: ({ req: { user } }) => Boolean(user),
   },
   versions: {
     drafts: true,
@@ -55,7 +60,7 @@ export const Landing: GlobalConfig = {
       name: 'heroTitle',
       type: 'textarea',
       required: true,
-      label: 'Hero title (use \\n para quebra)',
+      label: 'Hero title (Enter = quebra de linha)',
     },
     {
       name: 'lede',

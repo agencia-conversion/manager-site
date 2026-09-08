@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import React from 'react'
+import React, { cache } from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
@@ -10,13 +10,14 @@ export const dynamic = 'force-dynamic'
 
 type LandingData = typeof landingSeed & { _status?: string | null }
 
-async function loadLanding(): Promise<LandingData> {
+const loadLanding = cache(async (): Promise<LandingData> => {
   try {
     const payload = await getPayload({ config })
     const doc = await payload.findGlobal({
       slug: 'landing',
       depth: 0,
       draft: false,
+      overrideAccess: false,
     })
     if (doc?.heroTitle) {
       return {
@@ -45,7 +46,7 @@ async function loadLanding(): Promise<LandingData> {
     // D1 ainda não migrado / seed — fallback pixel-igual ao HTML estático
   }
   return { ...landingSeed, flowSteps: [...landingSeed.flowSteps] }
-}
+})
 
 export async function generateMetadata(): Promise<Metadata> {
   const landing = await loadLanding()

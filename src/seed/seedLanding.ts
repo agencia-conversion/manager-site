@@ -24,6 +24,7 @@ export async function seedLandingIfEmpty(payload: Payload): Promise<void> {
     })
     payload.logger.info('Seeded landing global from static copy')
   } catch (err) {
-    payload.logger.warn({ err }, 'Landing seed skipped (DB not ready?)')
+    const message = err instanceof Error ? `${err.name}: ${err.message}` : String(err)
+    payload.logger.warn({ err: message }, 'Landing seed skipped')
   }
 }
