@@ -1,4 +1,8 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { withPayload } from '@payloadcms/next/withPayload'
+
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -26,6 +30,13 @@ const nextConfig = {
       '.cjs': ['.cts', '.cjs'],
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
       '.mjs': ['.mts', '.mjs'],
+    }
+    // Alias explícito: withPayload reescreve resolve.alias e em clean
+    // webpack build os paths do tsconfig às vezes não entram a tempo.
+    webpackConfig.resolve.alias = {
+      ...(webpackConfig.resolve.alias || {}),
+      '@payload-config': path.resolve(dirname, 'src/payload.config.ts'),
+      '@': path.resolve(dirname, 'src'),
     }
 
     return webpackConfig
