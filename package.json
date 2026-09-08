@@ -33,6 +33,7 @@
     "@payloadcms/ui": "3.82.1",
     "cross-env": "10.1.0",
     "dotenv": "16.4.7",
+    "fast-safe-stringify": "^2.1.1",
     "graphql": "^16.8.1",
     "next": "16.3.3",
     "payload": "3.82.1",

@@ -22,7 +22,7 @@ const nextConfig = {
   // require("pkg-<hash>/api") e o OpenNext não resolve (payload#16470).
   // O build usa `next build --webpack` pra aplicar webpack.externals +
   // IgnorePlugin do withPayload e tirar drizzle-kit do bundle.
-  serverExternalPackages: ['jose', 'pg-cloudflare'],
+  serverExternalPackages: ['jose', 'pg-cloudflare', 'fast-safe-stringify'],
 
   // Your Next.js config here
   webpack: (webpackConfig: any) => {
