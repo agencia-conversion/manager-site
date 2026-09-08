@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Landing } from './globals/Landing'
 import { migrations } from './migrations'
+import { seedFirstUserIfEmpty } from './seed/seedFirstUser'
 import { seedLandingIfEmpty } from './seed/seedLanding'
 
 const filename = fileURLToPath(import.meta.url)
@@ -154,7 +155,10 @@ export default buildConfig({
     }),
   ],
   onInit: async (payload) => {
-    if (!isNextBuild) await seedLandingIfEmpty(payload)
+    if (!isNextBuild) {
+      await seedFirstUserIfEmpty(payload)
+      await seedLandingIfEmpty(payload)
+    }
   },
 })
 

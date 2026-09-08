@@ -42,6 +42,9 @@
     },
     "production": {
       "name": "manager-site",
+      "vars": {
+        "PAYLOAD_FIRST_USER_EMAIL": "admin@manager-site.local"
+      },
       "d1_databases": [
         {
           "binding": "D1",

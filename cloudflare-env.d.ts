@@ -7,6 +7,8 @@ declare namespace Cloudflare {
     D1: D1Database
     ASSETS: Fetcher
     PAYLOAD_SECRET: string
+    PAYLOAD_FIRST_USER_EMAIL?: string
+    PAYLOAD_FIRST_USER_PASSWORD?: string
   }
 }
 interface CloudflareEnv extends Cloudflare.Env {}
