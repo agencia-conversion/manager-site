@@ -19,6 +19,7 @@ const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(valu
 
 const isCLI = process.argv.some((value) => realpath(value)?.endsWith(path.join('payload', 'bin.js')))
 const isProduction = process.env.NODE_ENV === 'production'
+const isNextBuild = process.env.NEXT_PHASE === 'phase-production-build'
 
 const createLog =
   (level: string, fn: typeof console.log) => (objOrMsg: object | string, msg?: string) => {
@@ -40,8 +41,90 @@ const cloudflareLogger = {
   silent: () => {},
 } as any
 
-const cloudflare =
-  isCLI || !isProduction
+/** Noop D1/R2 so `next build` never opens local SQLite via getPlatformProxy (SQLITE_BUSY). */
+function createBuildStubContext(): CloudflareContext {
+  const emptyResult = {
+    success: true,
+    meta: {
+      duration: 0,
+      size_after: 0,
+      rows_read: 0,
+      rows_written: 0,
+      last_row_id: 0,
+      changed_db: false,
+      changes: 0,
+    },
+    results: [] as unknown[],
+  }
+
+  const prepared: {
+    bind: (...values: unknown[]) => typeof prepared
+    first: <T = unknown>(colName?: string) => Promise<T | null>
+    run: () => Promise<typeof emptyResult>
+    all: <T = unknown>() => Promise<typeof emptyResult & { results: T[] }>
+    raw: <T = unknown[]>() => Promise<T[]>
+  } = {
+    bind(..._values: unknown[]) {
+      return prepared
+    },
+    first: async <T = unknown>(_colName?: string) => null as T | null,
+    run: async () => emptyResult,
+    all: async <T = unknown>() => ({ ...emptyResult, results: [] as T[] }),
+    raw: async <T = unknown[]>() => [] as T[],
+  }
+
+  const d1 = {
+    prepare(_query: string) {
+      return prepared
+    },
+    batch: async (_statements: unknown[]) => [] as unknown[],
+    exec: async (_query: string) => ({ count: 0, duration: 0 }),
+    withSession(_constraintOrSession?: unknown) {
+      return d1
+    },
+  }
+
+  const r2 = {
+    head: async (_key: string): Promise<null> => null,
+    get: async (_key: string, _options?: unknown): Promise<null> => null,
+    put: async (_key: string, _value: unknown, _options?: unknown) => ({
+      key: _key,
+      version: '',
+      size: 0,
+      etag: '',
+      httpEtag: '',
+      checksums: { toJSON: () => ({}) },
+      uploaded: new Date(),
+      httpMetadata: {},
+      customMetadata: {},
+    }),
+    delete: async (_keys: string | string[]): Promise<void> => {},
+    list: async (_options?: unknown) => ({
+      objects: [] as unknown[],
+      truncated: false,
+      delimitedPrefixes: [] as string[],
+    }),
+  }
+
+  return {
+    env: {
+      D1: d1,
+      R2: r2,
+      ASSETS: { fetch: async () => new Response(null, { status: 404 }) },
+      PAYLOAD_SECRET: process.env.PAYLOAD_SECRET || 'build-stub',
+    },
+    cf: {} as never,
+    ctx: {
+      waitUntil() {},
+      passThroughOnException() {},
+      props: {},
+    },
+  } as unknown as CloudflareContext
+}
+
+const cloudflare = isNextBuild
+  ? createBuildStubContext()
+  : isCLI || !isProduction
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
 
@@ -71,7 +154,7 @@ export default buildConfig({
     }),
   ],
   onInit: async (payload) => {
-    await seedLandingIfEmpty(payload)
+    if (!isNextBuild) await seedLandingIfEmpty(payload)
   },
 })
 

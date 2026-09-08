@@ -11,6 +11,11 @@ export const dynamic = 'force-dynamic'
 type LandingData = typeof landingSeed & { _status?: string | null }
 
 const loadLanding = cache(async (): Promise<LandingData> => {
+  // Keep `next build` off D1/getPayload — deterministic HTML from seed.
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return { ...landingSeed, flowSteps: [...landingSeed.flowSteps] }
+  }
+
   try {
     const payload = await getPayload({ config })
     const doc = await payload.findGlobal({
