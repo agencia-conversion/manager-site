@@ -1,0 +1,61 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "manager-site",
+  "compatibility_date": "2025-08-15",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "d1_databases": [
+    {
+      "binding": "D1",
+      "database_id": "00000000-0000-4000-8000-000000000001",
+      "database_name": "manager-site",
+      "remote": true,
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "manager-site",
+    },
+  ],
+  "env": {
+    "preview": {
+      "name": "manager-site-preview",
+      "d1_databases": [
+        {
+          "binding": "D1",
+          "database_id": "00000000-0000-4000-8000-000000000002",
+          "database_name": "manager-site-preview",
+          "remote": true,
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2",
+          "bucket_name": "manager-site-preview",
+        },
+      ],
+    },
+    "production": {
+      "name": "manager-site",
+      "d1_databases": [
+        {
+          "binding": "D1",
+          "database_id": "00000000-0000-4000-8000-000000000001",
+          "database_name": "manager-site",
+          "remote": true,
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2",
+          "bucket_name": "manager-site",
+        },
+      ],
+    },
+  },
+}
