@@ -13,7 +13,14 @@ const nextConfig = {
   },
   // Packages with Cloudflare Workers (workerd) specific code
   // Read more: https://opennext.js.org/cloudflare/howtos/workerd
-  serverExternalPackages: ['jose', 'pg-cloudflare'],
+  serverExternalPackages: [
+    'jose',
+    'pg-cloudflare',
+    '@payloadcms/db-d1-sqlite',
+    '@payloadcms/drizzle',
+    '@payloadcms/drizzle/sqlite',
+    'drizzle-kit',
+  ],
 
   // Your Next.js config here
   webpack: (webpackConfig: any) => {
