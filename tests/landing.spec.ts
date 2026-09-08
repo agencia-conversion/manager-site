@@ -58,11 +58,13 @@ test('CTA e GitHub não 404', async ({ page, request }) => {
 })
 
 test('/admin pede login', async ({ page }) => {
+  // Admin Payload compila lazy no first hit (next dev); cold start pode passar de 60s.
+  test.setTimeout(120_000)
   const res = await page.goto('/admin', { waitUntil: 'domcontentloaded' })
   expect(res?.status()).toBeLessThan(500)
   // Payload redireciona client-side para /admin/login ou /admin/create-first-user
   const authField = page.locator('input[name="email"], input[type="email"]').first()
-  await expect(authField).toBeVisible({ timeout: 45_000 })
+  await expect(authField).toBeVisible({ timeout: 90_000 })
   await expect(page.locator('input[name="password"], input[type="password"]').first()).toBeVisible()
   await expect(page).toHaveURL(/\/admin/)
 })
