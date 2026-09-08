@@ -1,0 +1,32 @@
+package.json
+  s_275ded5ffb6b6a::t_07b127abc1c82f 15
+  s_70dc6f8bda4c08::t_12c9c545a827c8 9
+scripts/fix-payload-loadenv.mjs
+  s_275ded5ffb6b6a::t_ced78fccff36c6 1-12
+next.config.ts
+  s_70dc6f8bda4c08::t_37bb294fe244e8 16-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "b0cc4d8598002cf671ad06e0e8ce8b2cf6184850",
+  "prompts": {},
+  "sessions": {
+    "s_275ded5ffb6b6a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1d492830-b262-455d-b52d-b89556cbb665",
+        "model": "grok-4.6"
+      },
+      "human_author": null
+    },
+    "s_70dc6f8bda4c08": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "209d6bc6-3b60-48c7-8b40-b21dae5dc46e",
+        "model": "default"
+      },
+      "human_author": null
+    }
+  }
+}
