@@ -1,0 +1,45 @@
+functions/_lib/markdown.js
+  s_be0dc0a0fe8634::t_79c88453620265 18,37-42,52,54,56,58
+functions/admin/new.js
+  s_be0dc0a0fe8634::t_b42df23df52f58 67
+tests/blog.spec.ts
+  s_be0dc0a0fe8634::t_53e465ca2567e9 9,65-66,69-70
+  s_be0dc0a0fe8634::t_abca59f9215fa2 7-8,10-12,64,67-68,71-79,82-104
+functions/admin/edit/[id].js
+  s_be0dc0a0fe8634::t_5aede431862bf0 86
+functions/_lib/seed.js
+  s_be0dc0a0fe8634::t_33a8a64aead2ff 1,39-42
+functions/_lib/posts.js
+  s_be0dc0a0fe8634::t_571030860e96f8 28-32,34-36,42-46,48-53,55-65,85-102,161-166,185-187,213,219-222
+  s_97c5377d38b095::t_bb0ee08f46f04d 223
+public/styles.css
+  s_be0dc0a0fe8634::t_b7a54736ea7659 122
+playwright.config.ts
+  s_be0dc0a0fe8634::t_7e4a236934a706 28-31
+functions/_lib/rate-limit.js
+  s_be0dc0a0fe8634::t_5ce848b72c9b8f 29-30,37,43-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "e3586ec7ce015aec48567dd170a328951567eb87",
+  "prompts": {},
+  "sessions": {
+    "s_97c5377d38b095": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07e11-acaf-78b3-8b7a-34c2d63d9ff5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    },
+    "s_be0dc0a0fe8634": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d2b64cf4-85c8-4ed0-ab0e-7b0631b08c48",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
