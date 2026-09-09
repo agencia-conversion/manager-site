@@ -1,0 +1,21 @@
+tests/blog.spec.ts
+  s_1a42edd517ecb4::t_7c8132308338fe 17-18,20
+functions/_lib/seed.js
+  s_1a42edd517ecb4::t_d30bee7ff14a82 1,3-17,22,24-28,33-36,38-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "96e51c07809a6fb5d5607e1b41debcfd4eb16056",
+  "prompts": {},
+  "sessions": {
+    "s_1a42edd517ecb4": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2a98ef73-df16-4d01-90d6-eff8a8ea1789",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
