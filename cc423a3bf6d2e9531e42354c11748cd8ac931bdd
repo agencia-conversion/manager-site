@@ -1,0 +1,31 @@
+package.json
+  s_367925959bea83::t_a908af0586ecef 36
+next.config.ts
+  s_367925959bea83::t_da5909a3acde80 25
+package-lock.json
+  s_97c5377d38b095::t_29751153176e00 10,21,38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "cc423a3bf6d2e9531e42354c11748cd8ac931bdd",
+  "prompts": {},
+  "sessions": {
+    "s_367925959bea83": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5aabc902-e98a-47b3-ac11-56f7712ae125",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    },
+    "s_97c5377d38b095": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07e11-acaf-78b3-8b7a-34c2d63d9ff5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}

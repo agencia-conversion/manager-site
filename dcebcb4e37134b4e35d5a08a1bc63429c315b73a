@@ -1,0 +1,28 @@
+src/seed/seedFirstUser.ts
+  s_275ded5ffb6b6a::t_95e809756d93f4 1-29
+src/payload.config.ts
+  s_275ded5ffb6b6a::t_96fee494fd6160 158-161
+  s_275ded5ffb6b6a::t_12cdffddbec2e0 14
+wrangler.jsonc
+  s_275ded5ffb6b6a::t_bc98730f9c2542 45-47
+src/collections/Users.ts
+  s_275ded5ffb6b6a::t_c7ff2897c06a0e 9-14
+cloudflare-env.d.ts
+  s_275ded5ffb6b6a::t_7247a2b1b37ae1 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "dcebcb4e37134b4e35d5a08a1bc63429c315b73a",
+  "prompts": {},
+  "sessions": {
+    "s_275ded5ffb6b6a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "1d492830-b262-455d-b52d-b89556cbb665",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
