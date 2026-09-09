@@ -1,6 +1,7 @@
-import { createPost, listPosts, updatePost } from "./posts.js";
+import { createPost, getPost, listPosts, updatePost } from "./posts.js";
 
-const SEED_FLAG = "seed:v2";
+const SEED_FLAG = "seed:v3";
+const SEED_ID = "seed-welcome";
 
 const SEED_TITLE = "Bem-vindo ao blog do Manager";
 const SEED_EXCERPT =
@@ -16,30 +17,38 @@ const SEED_BODY = `Este é o post de exemplo do blog. Crie, edite e publique nov
 - O feed RSS está em \`/rss.xml\`
 `;
 
+/** Marcador exclusivo do body v1 (H1 duplicado). Só reparamos se ainda estiver presente. */
+const LEGACY_V1_H1 = "# Bem-vindo ao blog do Manager";
+
 /** @param {KVNamespace} kv */
 export async function ensureSeed(kv) {
   if (await kv.get(SEED_FLAG)) return;
 
   const existing = await listPosts(kv);
-  const welcome = existing.find((p) => p.title === SEED_TITLE);
 
-  if (welcome) {
-    // Repara seed:v1 que tinha um # no corpo (H1 duplicado na página do artigo).
-    await updatePost(kv, welcome.id, { body: SEED_BODY, excerpt: SEED_EXCERPT });
-    await kv.put(SEED_FLAG, "1");
-    return;
+  // Repara apenas posts que ainda têm o H1 legado no corpo — nunca sobrescreve edição do admin.
+  for (const p of existing) {
+    if (typeof p.body === "string" && p.body.includes(LEGACY_V1_H1)) {
+      await updatePost(kv, p.id, { body: SEED_BODY, excerpt: SEED_EXCERPT });
+    }
   }
 
-  if (existing.length > 0) {
-    await kv.put(SEED_FLAG, "1");
-    return;
+  const afterRepair = existing.length > 0 ? existing : await listPosts(kv);
+  if (afterRepair.length === 0) {
+    const already = await getPost(kv, SEED_ID);
+    if (!already) {
+      await createPost(
+        kv,
+        {
+          title: SEED_TITLE,
+          excerpt: SEED_EXCERPT,
+          body: SEED_BODY,
+          published: true,
+        },
+        { id: SEED_ID },
+      );
+    }
   }
 
-  await createPost(kv, {
-    title: SEED_TITLE,
-    excerpt: SEED_EXCERPT,
-    body: SEED_BODY,
-    published: true,
-  });
   await kv.put(SEED_FLAG, "1");
 }

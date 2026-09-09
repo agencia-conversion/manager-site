@@ -25,15 +25,28 @@ export function slugify(title) {
     .slice(0, 80) || "post";
 }
 
-/** @param {KVNamespace} kv @param {string} base */
-export async function uniqueSlug(kv, base) {
+/**
+ * Reserva um slug escrevendo o id e confirmando a posse (reduz colisão em paralelo).
+ * @param {KVNamespace} kv
+ * @param {string} base
+ * @param {string} id
+ */
+export async function claimSlug(kv, base, id) {
   let slug = base;
   let n = 2;
-  while (await kv.get(`slug:${slug}`)) {
+  for (;;) {
+    const existing = await kv.get(`slug:${slug}`);
+    if (!existing) {
+      await kv.put(`slug:${slug}`, id);
+      const claimed = await kv.get(`slug:${slug}`);
+      if (claimed === id) return slug;
+    } else if (existing === id) {
+      return slug;
+    }
     slug = `${base}-${n}`;
     n++;
+    if (n > 1000) throw new Error("slug collision");
   }
-  return slug;
 }
 
 /** @param {KVNamespace} kv @returns {Promise<string[]>} */
@@ -92,12 +105,13 @@ export async function listPublished(kv) {
 /**
  * @param {KVNamespace} kv
  * @param {{ title: string, excerpt?: string, body: string, published?: boolean }} input
+ * @param {{ id?: string }} [opts]
  * @returns {Promise<Post>}
  */
-export async function createPost(kv, input) {
-  const id = crypto.randomUUID();
+export async function createPost(kv, input, opts = {}) {
+  const id = opts.id || crypto.randomUUID();
   const base = slugify(input.title);
-  const slug = await uniqueSlug(kv, base);
+  const slug = await claimSlug(kv, base, id);
   const now = new Date().toISOString();
   /** @type {Post} */
   const post = {
@@ -111,10 +125,11 @@ export async function createPost(kv, input) {
     updatedAt: now,
   };
   await kv.put(`post:${id}`, JSON.stringify(post));
-  await kv.put(`slug:${slug}`, id);
   const ids = await readIndex(kv);
-  ids.unshift(id);
-  await writeIndex(kv, ids);
+  if (!ids.includes(id)) {
+    ids.unshift(id);
+    await writeIndex(kv, ids);
+  }
   return post;
 }
 
@@ -132,8 +147,7 @@ export async function updatePost(kv, id, input) {
   let nextSlug = existing.slug;
   if (nextTitle !== existing.title) {
     await kv.delete(`slug:${existing.slug}`);
-    nextSlug = await uniqueSlug(kv, slugify(nextTitle));
-    await kv.put(`slug:${nextSlug}`, id);
+    nextSlug = await claimSlug(kv, slugify(nextTitle), id);
   }
 
   const body = input.body !== undefined ? input.body : existing.body;
