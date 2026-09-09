@@ -1,0 +1,25 @@
+tests/blog.spec.ts
+  s_c261317a84e6ac::t_591cf01df02220 1-6,8-102
+  s_c261317a84e6ac::t_2e35dacfa32129 7
+README.md
+  s_c261317a84e6ac::t_1bcc3f61b5517d 3,5-40
+playwright.config.ts
+  s_c261317a84e6ac::t_d2115d29ed5b46 22,27,35,38
+  s_c261317a84e6ac::t_8a49af132d7702 2-3,8-21,23-24,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "397314a65fd5c5936c1e0609f1949af5690bfca8",
+  "prompts": {},
+  "sessions": {
+    "s_c261317a84e6ac": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "6fd1e555-0e86-449b-bbd7-8d9713163650",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
