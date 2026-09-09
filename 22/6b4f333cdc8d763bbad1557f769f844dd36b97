@@ -1,0 +1,41 @@
+public/styles.css
+  s_c261317a84e6ac::t_3705d2e7a3020f 154-322,331-334
+  s_c261317a84e6ac::t_ef42a90d8679f8 42
+  s_9b0b4b00053f07::t_9e51478f856256 335
+wrangler.jsonc
+  s_c261317a84e6ac::t_2ada629504496b 1-12
+.dev.vars.example
+  s_c261317a84e6ac::t_4f658631ab97f3 1-6
+public/manager/index.html
+  s_c261317a84e6ac::t_4e60a11bc76620 1-58
+package.json
+  s_c261317a84e6ac::t_0ce623e8f45062 5,9-10
+.gitignore
+  s_c261317a84e6ac::t_fb7645eea59097 5-6
+package-lock.json
+  s_c261317a84e6ac::t_c06202493f9a95 9-1142,1161-1349,1378-1580
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "226b4f333cdc8d763bbad1557f769f844dd36b97",
+  "prompts": {},
+  "sessions": {
+    "s_9b0b4b00053f07": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cbfd180a-fcbd-4cf7-91b0-cf84ff0f0214",
+        "model": "grok-4.6"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    },
+    "s_c261317a84e6ac": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "6fd1e555-0e86-449b-bbd7-8d9713163650",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
