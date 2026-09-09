@@ -1,0 +1,53 @@
+functions/_lib/html.js
+  s_e8d11bf70e8a41::t_aa823b2eededbc 11-17,60-65,70
+functions/index.js
+  s_e8d11bf70e8a41::t_e716d7aaf246fd 40-42
+functions/admin/edit/[id].js
+  s_e8d11bf70e8a41::t_be1816c6480121 79,83-88
+  s_e8d11bf70e8a41::t_ebb95a9132215e 2,9
+functions/admin/index.js
+  s_e8d11bf70e8a41::t_303e79ecb9b854 2,10
+functions/admin/logout.js
+  s_e8d11bf70e8a41::t_5f8768b60592b9 4,7,17-22
+  s_97c5377d38b095::t_aa90e41fa04f47 23-24
+public/styles.css
+  s_e8d11bf70e8a41::t_59e4ef08929959 62-81
+functions/admin/new.js
+  s_e8d11bf70e8a41::t_c1cd7ae761ccd3 2,8
+  s_e8d11bf70e8a41::t_b585117239c282 60,64-69
+functions/_lib/markdown.js
+  s_e8d11bf70e8a41::t_5b503ac91ccd4b 14,18-22,25,39-50,53,99-102,117-124
+functions/rss.xml.js
+  s_e8d11bf70e8a41::t_0445a7e93f134c 4-8,22,26
+functions/_lib/auth.js
+  s_e8d11bf70e8a41::t_f1dd2db0e4d491 36-39,46-48,104-109
+functions/post/[slug].js
+  s_e8d11bf70e8a41::t_3a84285f25177e 32-34
+tests/blog.spec.ts
+  s_e8d11bf70e8a41::t_1c0b88204e76c2 3-11,22-24,61-68,75,78,81-87,107
+  s_e8d11bf70e8a41::t_32285987786f8c 72,92,102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "2d143c4f28abcac531e07bac409a2ab08da56e10",
+  "prompts": {},
+  "sessions": {
+    "s_97c5377d38b095": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07e11-acaf-78b3-8b7a-34c2d63d9ff5",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    },
+    "s_e8d11bf70e8a41": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a3f4926d-a2cd-4eaf-964b-1ad835ee1122",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
