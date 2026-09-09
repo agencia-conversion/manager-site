@@ -1,0 +1,47 @@
+functions/index.js
+  s_c261317a84e6ac::t_bb87d96bfcb6fe 1-41
+functions/rss.xml.js
+  s_c261317a84e6ac::t_33e0a34f6d0c7a 1-44
+functions/admin/index.js
+  s_c261317a84e6ac::t_a392151c0be2c5 1-55
+functions/admin/logout.js
+  s_c261317a84e6ac::t_2e794017bcdab0 1-16
+functions/_lib/markdown.js
+  s_c261317a84e6ac::t_a6ce045e871d9f 1-111
+functions/post/[slug].js
+  s_c261317a84e6ac::t_e7a7f87383a017 1-33
+functions/_lib/rate-limit.js
+  s_c261317a84e6ac::t_143ad5f7a53224 1-38
+functions/_lib/posts.js
+  s_c261317a84e6ac::t_afbd78b2b645b5 1-188
+functions/admin/edit/[id].js
+  s_c261317a84e6ac::t_b59f860f308c66 1-85
+functions/_lib/html.js
+  s_c261317a84e6ac::t_e1fdeb717ad763 1-70
+functions/admin/delete/[id].js
+  s_c261317a84e6ac::t_e29590cd41f0d7 1-19
+functions/_lib/auth.js
+  s_c261317a84e6ac::t_0fee379a74b887 1-140
+functions/_lib/seed.js
+  s_c261317a84e6ac::t_f6ed7e80fcccab 1-30
+functions/admin/new.js
+  s_c261317a84e6ac::t_a6f405bbc8652f 1-66
+functions/admin/login.js
+  s_c261317a84e6ac::t_1af2ef489aa503 1-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "734ad73098e2136711a1c91f2891861df69dbe24",
+  "prompts": {},
+  "sessions": {
+    "s_c261317a84e6ac": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "6fd1e555-0e86-449b-bbd7-8d9713163650",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
