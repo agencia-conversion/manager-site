@@ -14,8 +14,10 @@ test("post de exemplo abre com título e corpo", async ({ page }) => {
   await expect(first).toBeVisible();
   await first.click();
   await expect(page).toHaveURL(/\/post\//);
-  await expect(page.locator("article.post h1")).toBeVisible();
+  await expect(page.locator("article.post h1")).toHaveCount(1);
+  await expect(page.locator("article.post h1")).toHaveText(/bem-vindo ao blog do manager/i);
   await expect(page.locator("article.post .prose")).toBeVisible();
+  await expect(page.locator("article.post .prose h1")).toHaveCount(0);
 });
 
 test("slug inexistente retorna 404", async ({ request }) => {
