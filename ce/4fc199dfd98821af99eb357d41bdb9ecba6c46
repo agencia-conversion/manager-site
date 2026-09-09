@@ -1,0 +1,23 @@
+functions/_lib/posts.js
+  s_e8d11bf70e8a41::t_6257854aad3769 108,111-112,114,129-132
+  s_e8d11bf70e8a41::t_9c5906327b41a0 150
+  s_e8d11bf70e8a41::t_a5b1cc2c3a953f 28-34,37-45,48
+functions/_lib/seed.js
+  s_e8d11bf70e8a41::t_f6fef2a79cc522 1,3-4,20-22,29-33,36-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "ce4fc199dfd98821af99eb357d41bdb9ecba6c46",
+  "prompts": {},
+  "sessions": {
+    "s_e8d11bf70e8a41": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a3f4926d-a2cd-4eaf-964b-1ad835ee1122",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
