@@ -25,28 +25,44 @@ export function slugify(title) {
     .slice(0, 80) || "post";
 }
 
+/** Sufixo curto e estável a partir do id — único por construção. */
+function uniqueSuffix(id) {
+  return String(id).replace(/-/g, "").slice(0, 8);
+}
+
 /**
- * Reserva um slug escrevendo o id e confirmando a posse (reduz colisão em paralelo).
+ * Reserva um slug. Em corrida, o ownership check falha e cai no sufixo único
+ * (`base-<8chars do id>`), que não depende de teste-e-gravação.
+ *
  * @param {KVNamespace} kv
  * @param {string} base
  * @param {string} id
  */
 export async function claimSlug(kv, base, id) {
-  let slug = base;
-  let n = 2;
-  for (;;) {
+  const candidates = [base];
+  for (let n = 2; n <= 20; n++) candidates.push(`${base}-${n}`);
+  candidates.push(`${base}-${uniqueSuffix(id)}`);
+
+  for (const slug of candidates) {
     const existing = await kv.get(`slug:${slug}`);
-    if (!existing) {
-      await kv.put(`slug:${slug}`, id);
-      const claimed = await kv.get(`slug:${slug}`);
-      if (claimed === id) return slug;
-    } else if (existing === id) {
-      return slug;
-    }
-    slug = `${base}-${n}`;
-    n++;
-    if (n > 1000) throw new Error("slug collision");
+    if (existing === id) return slug;
+    if (existing) continue;
+
+    await kv.put(`slug:${slug}`, id);
+    const claimed = await kv.get(`slug:${slug}`);
+    if (claimed === id) return slug;
   }
+
+  // Fallback absoluto — id completo, impossível colidir entre posts.
+  const fallback = `${base}-${id}`;
+  await kv.put(`slug:${fallback}`, id);
+  return fallback;
+}
+
+/** @param {KVNamespace} kv @param {string} slug @param {string} id */
+async function releaseSlugIfOwned(kv, slug, id) {
+  const owner = await kv.get(`slug:${slug}`);
+  if (owner === id) await kv.delete(`slug:${slug}`);
 }
 
 /** @param {KVNamespace} kv @returns {Promise<string[]>} */
@@ -64,6 +80,24 @@ async function readIndex(kv) {
 /** @param {KVNamespace} kv @param {string[]} ids */
 async function writeIndex(kv, ids) {
   await kv.put(INDEX_KEY, JSON.stringify(ids));
+}
+
+/**
+ * Inclui id no índice com retry — mitiga lost-update em criações paralelas.
+ * @param {KVNamespace} kv
+ * @param {string} id
+ */
+async function addToIndex(kv, id) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const ids = await readIndex(kv);
+    if (ids.includes(id)) return;
+    await writeIndex(kv, [id, ...ids]);
+    const check = await readIndex(kv);
+    if (check.includes(id)) return;
+  }
+  // Última tentativa: merge do que existir + id
+  const ids = await readIndex(kv);
+  if (!ids.includes(id)) await writeIndex(kv, [id, ...ids]);
 }
 
 /** @param {KVNamespace} kv @param {string} id @returns {Promise<Post|null>} */
@@ -124,11 +158,12 @@ export async function createPost(kv, input, opts = {}) {
     createdAt: now,
     updatedAt: now,
   };
-  await kv.put(`post:${id}`, JSON.stringify(post));
-  const ids = await readIndex(kv);
-  if (!ids.includes(id)) {
-    ids.unshift(id);
-    await writeIndex(kv, ids);
+  try {
+    await kv.put(`post:${id}`, JSON.stringify(post));
+    await addToIndex(kv, id);
+  } catch (err) {
+    await releaseSlugIfOwned(kv, slug, id);
+    throw err;
   }
   return post;
 }
@@ -146,8 +181,10 @@ export async function updatePost(kv, id, input) {
   const nextTitle = input.title !== undefined ? input.title.trim() : existing.title;
   let nextSlug = existing.slug;
   if (nextTitle !== existing.title) {
-    await kv.delete(`slug:${existing.slug}`);
     nextSlug = await claimSlug(kv, slugify(nextTitle), id);
+    if (nextSlug !== existing.slug) {
+      await releaseSlugIfOwned(kv, existing.slug, id);
+    }
   }
 
   const body = input.body !== undefined ? input.body : existing.body;
@@ -173,10 +210,15 @@ export async function deletePost(kv, id) {
   const existing = await getPost(kv, id);
   if (!existing) return false;
   await kv.delete(`post:${id}`);
-  await kv.delete(`slug:${existing.slug}`);
+  await releaseSlugIfOwned(kv, existing.slug, id);
   const ids = (await readIndex(kv)).filter((x) => x !== id);
   await writeIndex(kv, ids);
   return true;
+}
+
+/** Garante que um post órfão (existe mas fora do índice) entre na listagem. */
+export async function ensureIndexed(kv, id) {
+  await addToIndex(kv, id);
 }
 
 /** @param {string} body */

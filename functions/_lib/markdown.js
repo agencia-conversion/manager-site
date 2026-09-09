@@ -15,7 +15,7 @@ export function renderMarkdown(src) {
 
   const flushList = () => {
     if (!listType) return;
-    if (listType === "ol" && listStart && listStart !== 1) {
+    if (listType === "ol" && listStart !== null && listStart !== 1) {
       out.push(`<ol start="${listStart}">${listBuf.join("")}</ol>`);
     } else {
       out.push(`<${listType}>${listBuf.join("")}</${listType}>`);
@@ -34,6 +34,12 @@ export function renderMarkdown(src) {
     inCode = false;
   };
 
+  /** Ênfase sem tocar em placeholders de slots. */
+  const applyEmphasis = (s) =>
+    s
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
   const inline = (s) => {
     let t = escapeHtml(s);
     /** @type {string[]} */
@@ -43,13 +49,13 @@ export function renderMarkdown(src) {
       slots.push(html);
       return `\u0000${idx}\u0000`;
     };
-    // Code spans e links antes de ênfase — evita reescrever conteúdo protegido.
+    // Code spans antes de tudo — conteúdo protegido.
     t = t.replace(/`([^`]+)`/g, (_, code) => park(`<code>${code}</code>`));
+    // Links: ênfase só no label; URL permanece intacta.
     t = t.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (_, label, href) =>
-      park(`<a href="${href}" rel="noopener noreferrer">${label}</a>`),
+      park(`<a href="${href}" rel="noopener noreferrer">${applyEmphasis(label)}</a>`),
     );
-    t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    t = t.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    t = applyEmphasis(t);
     t = t.replace(/\u0000(\d+)\u0000/g, (_, idx) => slots[Number(idx)]);
     return t;
   };

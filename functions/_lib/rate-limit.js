@@ -26,20 +26,29 @@ export async function consumeLoginAttempt(kv, ip) {
   const listed = await kv.list({ prefix, limit: MAX_ATTEMPTS + 50 });
   const count = listed.keys.length;
   if (count > MAX_ATTEMPTS) {
+    // Não acumula chave além do teto (rajadas não esgotam KV).
+    await kv.delete(attemptKey);
     return { allowed: false, remaining: 0 };
   }
   return { allowed: true, remaining: MAX_ATTEMPTS - count };
 }
 
 /**
- * Limpa tentativas do IP após login bem-sucedido.
+ * Limpa todas as tentativas do IP (pagina o cursor do list).
  * @param {KVNamespace} kv
  * @param {string} ip
  */
 export async function clearLoginRate(kv, ip) {
   const prefix = ratePrefix(ip);
-  const listed = await kv.list({ prefix, limit: 100 });
-  await Promise.all(listed.keys.map((k) => kv.delete(k.name)));
+  let cursor;
+  for (;;) {
+    const listed = await kv.list(
+      cursor ? { prefix, limit: 100, cursor } : { prefix, limit: 100 },
+    );
+    await Promise.all(listed.keys.map((k) => kv.delete(k.name)));
+    if (listed.list_complete) break;
+    cursor = listed.cursor;
+  }
 }
 
 /** @param {Request} request */

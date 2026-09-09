@@ -4,9 +4,12 @@ function authReady() {
   return Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && process.env.SESSION_SECRET);
 }
 
-/** IP único por tentativa — evita acumular rate-limit entre runs desktop/mobile. */
-function uniqueIp(label: string) {
-  return `qa-${label}-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+/**
+ * Título único por projeto + run — evita colisão quando desktop e mobile
+ * criam posts no mesmo KV.
+ */
+function uniqueTitle(label: string) {
+  return `Post QA ${label} ${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
 }
 
 test("home 200 lista posts publicados", async ({ page }) => {
@@ -58,53 +61,48 @@ test("admin sem sessão redireciona para login", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /entrar/i })).toBeVisible();
 });
 
-test("login inválido mostra erro genérico", async ({ browser, baseURL }) => {
-  test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
+/**
+ * Auth em série: no preview o CF-Connecting-IP é o IP real (header injetado
+ * não isola). workers:1 no config + serial aqui evita rate-limit cruzado.
+ */
+test.describe("admin auth", () => {
+  test.describe.configure({ mode: "serial" });
 
-  const context = await browser.newContext({
-    baseURL: baseURL || undefined,
-    extraHTTPHeaders: { "CF-Connecting-IP": uniqueIp("bad") },
+  test("login inválido mostra erro genérico", async ({ page }) => {
+    test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
+
+    await page.goto("/admin/login");
+    await page.fill('input[name="email"]', "errado@example.com");
+    await page.fill('input[name="password"]', "senha-errada");
+    await page.getByRole("button", { name: /entrar/i }).click();
+    await expect(page).toHaveURL(/\/admin\/login/);
+    await expect(page.getByRole("alert")).toContainText(/credenciais inválidas/i);
   });
-  const page = await context.newPage();
-  await page.goto("/admin/login");
-  await page.fill('input[name="email"]', "errado@example.com");
-  await page.fill('input[name="password"]', "senha-errada");
-  await page.getByRole("button", { name: /entrar/i }).click();
-  await expect(page).toHaveURL(/\/admin\/login/);
-  await expect(page.getByRole("alert")).toContainText(/credenciais inválidas/i);
-  await context.close();
-});
 
-test("login correto entra e criar post aparece na home", async ({ browser, baseURL }) => {
-  const email = process.env.ADMIN_EMAIL;
-  const password = process.env.ADMIN_PASSWORD;
-  test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
+  test("login correto entra e criar post aparece na home", async ({ page }, testInfo) => {
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+    test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
 
-  const context = await browser.newContext({
-    baseURL: baseURL || undefined,
-    extraHTTPHeaders: { "CF-Connecting-IP": uniqueIp("ok") },
+    await page.goto("/admin/login");
+    await page.fill('input[name="email"]', email!);
+    await page.fill('input[name="password"]', password!);
+    await page.getByRole("button", { name: /entrar/i }).click();
+    await expect(page).toHaveURL(/\/admin\/?$/);
+    await expect(page.getByRole("heading", { name: /^posts$/i })).toBeVisible();
+
+    const title = uniqueTitle(testInfo.project.name);
+    await page.goto("/admin/new");
+    await page.fill('input[name="title"]', title);
+    await page.fill('input[name="excerpt"]', "Resumo do post de QA");
+    await page.fill('textarea[name="body"]', "## Olá\n\nCorpo do post de QA.");
+    await page.locator('input[name="published"]').check();
+    await page.getByRole("button", { name: /criar/i }).click();
+    await expect(page).toHaveURL(/\/admin\/edit\//);
+
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: title })).toBeVisible();
   });
-  const page = await context.newPage();
-
-  await page.goto("/admin/login");
-  await page.fill('input[name="email"]', email!);
-  await page.fill('input[name="password"]', password!);
-  await page.getByRole("button", { name: /entrar/i }).click();
-  await expect(page).toHaveURL(/\/admin\/?$/);
-  await expect(page.getByRole("heading", { name: /^posts$/i })).toBeVisible();
-
-  const title = `Post QA ${Date.now()}`;
-  await page.goto("/admin/new");
-  await page.fill('input[name="title"]', title);
-  await page.fill('input[name="excerpt"]', "Resumo do post de QA");
-  await page.fill('textarea[name="body"]', "## Olá\n\nCorpo do post de QA.");
-  await page.locator('input[name="published"]').check();
-  await page.getByRole("button", { name: /criar/i }).click();
-  await expect(page).toHaveURL(/\/admin\/edit\//);
-
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: title })).toBeVisible();
-  await context.close();
 });
 
 test("sem console error de 5xx na home", async ({ page }) => {

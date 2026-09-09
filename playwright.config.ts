@@ -25,6 +25,10 @@ if (!preview) loadDevVars();
 export default defineConfig({
   testDir: "./tests",
   timeout: 60_000,
+  // Um worker: no preview o rate-limit de login é por IP real (CF-Connecting-IP
+  // injetado não isola). Serializa desktop/mobile e evita falso vermelho.
+  fullyParallel: false,
+  workers: 1,
   use: {
     baseURL: preview || local,
     trace: "off",

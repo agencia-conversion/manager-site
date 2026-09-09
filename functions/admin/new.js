@@ -64,7 +64,7 @@ export async function onRequestPost(context) {
   const post = await createPost(context.env.BLOG, {
     title,
     excerpt,
-    body: body.trim(),
+    body,
     published,
   });
   return redirect(`/admin/edit/${encodeURIComponent(post.id)}`);

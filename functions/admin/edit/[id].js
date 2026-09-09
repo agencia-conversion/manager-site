@@ -83,7 +83,7 @@ export async function onRequestPost(context) {
   await updatePost(context.env.BLOG, context.params.id, {
     title,
     excerpt,
-    body: body.trim(),
+    body,
     published,
   });
   return redirect(`/admin/edit/${encodeURIComponent(context.params.id)}`);

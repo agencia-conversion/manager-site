@@ -1,4 +1,4 @@
-import { createPost, getPost, listPosts, updatePost } from "./posts.js";
+import { createPost, ensureIndexed, getPost, listPosts, updatePost } from "./posts.js";
 
 const SEED_FLAG = "seed:v3";
 const SEED_ID = "seed-welcome";
@@ -36,7 +36,10 @@ export async function ensureSeed(kv) {
   const afterRepair = existing.length > 0 ? existing : await listPosts(kv);
   if (afterRepair.length === 0) {
     const already = await getPost(kv, SEED_ID);
-    if (!already) {
+    if (already) {
+      // Órfão: post existe mas sumiu do índice — só reindexa.
+      await ensureIndexed(kv, SEED_ID);
+    } else {
       await createPost(
         kv,
         {
