@@ -1,0 +1,6 @@
+# Copie para .dev.vars (gitignored) e preencha no painel do Cloudflare Pages.
+# Nunca commite senhas reais.
+
+ADMIN_EMAIL=diego@conversion.com.br
+ADMIN_PASSWORD=
+SESSION_SECRET=
