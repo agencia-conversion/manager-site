@@ -39,6 +39,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.32em;
   color: var(--accent-2);
+  text-decoration: none;
 }
 
 nav {
@@ -150,6 +151,175 @@ footer {
   border-top: 1px solid var(--line);
 }
 
+.post-list {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-list li {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.post-list h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.post-list a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.post-list a:hover h2 {
+  color: var(--accent-2);
+}
+
+.post-list time {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.post-list p {
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+.post .prose {
+  margin-top: 1.75rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.post .prose h2,
+.post .prose h3 {
+  margin-top: 1.75rem;
+  letter-spacing: -0.02em;
+}
+
+.post .prose p {
+  color: var(--muted);
+}
+
+.post .prose code,
+.admin-form code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.88em;
+}
+
+.post .prose pre {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.post .back {
+  margin-top: 2.5rem;
+}
+
+.post .back a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.post .back a:hover {
+  color: var(--text);
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 40rem;
+  margin-top: 1.5rem;
+}
+
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.admin-form label.check {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form textarea {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  color: var(--text);
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 12rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.admin-form button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  width: fit-content;
+}
+
+.admin-form.danger {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.form-error {
+  color: #ff8b8b;
+  margin: 0 0 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  font-size: 0.92rem;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-table th {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.admin-table a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
 @media (max-width: 720px) {
   .flow ol {
     grid-template-columns: 1fr;
@@ -157,5 +327,10 @@ footer {
 
   main {
     padding-top: 2.5rem;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
   }
 }
