@@ -33,14 +33,19 @@ function bufferToBase64Url(buf) {
 
 /** @param {string} s */
 function base64UrlEncode(s) {
-  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const bytes = new TextEncoder().encode(s);
+  let bin = "";
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
 /** @param {string} s */
 function base64UrlDecode(s) {
   const pad = s.length % 4 === 0 ? "" : "=".repeat(4 - (s.length % 4));
   const b64 = s.replace(/-/g, "+").replace(/_/g, "/") + pad;
-  return atob(b64);
+  const bin = atob(b64);
+  const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
 }
 
 /** @param {string} a @param {string} b */
@@ -96,7 +101,12 @@ export async function verifySessionToken(env, token) {
 export function readSessionCookie(request) {
   const header = request.headers.get("cookie") || "";
   const match = header.match(/(?:^|;\s*)session=([^;]+)/);
-  return match ? decodeURIComponent(match[1]) : null;
+  if (!match) return null;
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return null;
+  }
 }
 
 /**

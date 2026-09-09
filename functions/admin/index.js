@@ -1,5 +1,5 @@
 import { requireSession } from "../_lib/auth.js";
-import { escapeHtml, htmlResponse, page } from "../_lib/html.js";
+import { escapeHtml, htmlResponse, logoutForm, page } from "../_lib/html.js";
 import { formatDate, listPosts } from "../_lib/posts.js";
 import { ensureSeed } from "../_lib/seed.js";
 
@@ -7,7 +7,7 @@ function adminNav() {
   return `<nav>
     <a href="/">Blog</a>
     <a href="/admin/new">Novo post</a>
-    <a href="/admin/logout">Sair</a>
+    ${logoutForm()}
   </nav>`;
 }
 

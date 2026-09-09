@@ -29,5 +29,7 @@ export async function onRequestGet(context) {
       <p class="back"><a href="/">← Todos os posts</a></p>
     </article>`;
 
-  return htmlResponse(page({ title: `${post.title} — Manager`, body }));
+  return htmlResponse(page({ title: `${post.title} — Manager`, body }), 200, {
+    cacheControl: "public, max-age=60",
+  });
 }

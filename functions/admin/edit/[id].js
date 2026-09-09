@@ -1,12 +1,12 @@
 import { requireSession } from "../../_lib/auth.js";
-import { escapeHtml, htmlResponse, page, redirect } from "../../_lib/html.js";
+import { escapeHtml, htmlResponse, logoutForm, page, redirect } from "../../_lib/html.js";
 import { getPost, updatePost } from "../../_lib/posts.js";
 
 function adminNav() {
   return `<nav>
     <a href="/admin">Posts</a>
     <a href="/admin/new">Novo</a>
-    <a href="/admin/logout">Sair</a>
+    ${logoutForm()}
   </nav>`;
 }
 
@@ -76,10 +76,15 @@ export async function onRequestPost(context) {
   const body = String(form.get("body") || "");
   const published = form.get("published") === "1";
 
-  if (!title || !body) {
+  if (!title || !body.trim()) {
     return redirect(`/admin/edit/${encodeURIComponent(context.params.id)}`);
   }
 
-  await updatePost(context.env.BLOG, context.params.id, { title, excerpt, body, published });
+  await updatePost(context.env.BLOG, context.params.id, {
+    title,
+    excerpt,
+    body: body.trim(),
+    published,
+  });
   return redirect(`/admin/edit/${encodeURIComponent(context.params.id)}`);
 }

@@ -1,6 +1,11 @@
 import { listPublished } from "./_lib/posts.js";
 import { ensureSeed } from "./_lib/seed.js";
 
+/** Escapa terminador CDATA para não quebrar o XML. */
+function cdata(s) {
+  return String(s).replace(/]]>/g, "]]]]><![CDATA[>");
+}
+
 /**
  * @param {{ request: Request, env: { BLOG: KVNamespace } }} context
  */
@@ -14,11 +19,11 @@ export async function onRequestGet(context) {
     .map((p) => {
       const link = `${origin}/post/${encodeURIComponent(p.slug)}`;
       return `<item>
-  <title><![CDATA[${p.title}]]></title>
+  <title><![CDATA[${cdata(p.title)}]]></title>
   <link>${link}</link>
   <guid isPermaLink="true">${link}</guid>
   <pubDate>${new Date(p.createdAt).toUTCString()}</pubDate>
-  <description><![CDATA[${p.excerpt}]]></description>
+  <description><![CDATA[${cdata(p.excerpt)}]]></description>
 </item>`;
     })
     .join("\n");

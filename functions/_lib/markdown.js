@@ -11,13 +11,18 @@ export function renderMarkdown(src) {
   let codeBuf = [];
   let listType = null;
   let listBuf = [];
+  let listStart = null;
 
   const flushList = () => {
     if (!listType) return;
-    const tag = listType;
-    out.push(`<${tag}>${listBuf.join("")}</${tag}>`);
+    if (listType === "ol" && listStart && listStart !== 1) {
+      out.push(`<ol start="${listStart}">${listBuf.join("")}</ol>`);
+    } else {
+      out.push(`<${listType}>${listBuf.join("")}</${listType}>`);
+    }
     listType = null;
     listBuf = [];
+    listStart = null;
   };
 
   const flushCode = () => {
@@ -31,13 +36,21 @@ export function renderMarkdown(src) {
 
   const inline = (s) => {
     let t = escapeHtml(s);
-    t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+    /** @type {string[]} */
+    const slots = [];
+    const park = (html) => {
+      const idx = slots.length;
+      slots.push(html);
+      return `\u0000${idx}\u0000`;
+    };
+    // Code spans e links antes de ênfase — evita reescrever conteúdo protegido.
+    t = t.replace(/`([^`]+)`/g, (_, code) => park(`<code>${code}</code>`));
+    t = t.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (_, label, href) =>
+      park(`<a href="${href}" rel="noopener noreferrer">${label}</a>`),
+    );
     t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     t = t.replace(/\*([^*]+)\*/g, "<em>$1</em>");
-    t = t.replace(
-      /\[([^\]]+)\]\((https?:[^)\s]+)\)/g,
-      '<a href="$2" rel="noopener noreferrer">$1</a>',
-    );
+    t = t.replace(/\u0000(\d+)\u0000/g, (_, idx) => slots[Number(idx)]);
     return t;
   };
 
@@ -83,7 +96,10 @@ export function renderMarkdown(src) {
     const ol = /^(\d+)\.\s+(.+)$/.exec(line);
     if (ol) {
       if (listType && listType !== "ol") flushList();
-      listType = "ol";
+      if (!listType) {
+        listType = "ol";
+        listStart = Number(ol[1]);
+      }
       listBuf.push(`<li>${inline(ol[2])}</li>`);
       i++;
       continue;
@@ -98,7 +114,14 @@ export function renderMarkdown(src) {
     flushList();
     const para = [line];
     i++;
-    while (i < lines.length && lines[i].trim() && !lines[i].startsWith("#") && !lines[i].startsWith("```") && !/^[-*]\s+/.test(lines[i]) && !/^\d+\.\s+/.test(lines[i])) {
+    while (
+      i < lines.length &&
+      lines[i].trim() &&
+      !lines[i].startsWith("#") &&
+      !lines[i].startsWith("```") &&
+      !/^[-*]\s+/.test(lines[i]) &&
+      !/^\d+\.\s+/.test(lines[i])
+    ) {
       para.push(lines[i]);
       i++;
     }

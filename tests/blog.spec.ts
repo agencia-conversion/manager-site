@@ -1,5 +1,14 @@
 import { expect, test } from "@playwright/test";
 
+function authReady() {
+  return Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && process.env.SESSION_SECRET);
+}
+
+/** IP único por tentativa — evita acumular rate-limit entre runs desktop/mobile. */
+function uniqueIp(label: string) {
+  return `qa-${label}-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+}
+
 test("home 200 lista posts publicados", async ({ page }) => {
   const res = await page.goto("/");
   expect(res?.ok()).toBeTruthy();
@@ -10,9 +19,9 @@ test("home 200 lista posts publicados", async ({ page }) => {
 
 test("post de exemplo abre com título e corpo", async ({ page }) => {
   await page.goto("/");
-  const first = page.locator(".post-list a").first();
-  await expect(first).toBeVisible();
-  await first.click();
+  const link = page.getByRole("link", { name: /bem-vindo ao blog do manager/i });
+  await expect(link).toBeVisible();
+  await link.click();
   await expect(page).toHaveURL(/\/post\//);
   await expect(page.locator("article.post h1")).toHaveCount(1);
   await expect(page.locator("article.post h1")).toHaveText(/bem-vindo ao blog do manager/i);
@@ -49,24 +58,38 @@ test("admin sem sessão redireciona para login", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /entrar/i })).toBeVisible();
 });
 
-test("login inválido mostra erro genérico", async ({ page }) => {
+test("login inválido mostra erro genérico", async ({ browser, baseURL }) => {
+  test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
+
+  const context = await browser.newContext({
+    baseURL: baseURL || undefined,
+    extraHTTPHeaders: { "CF-Connecting-IP": uniqueIp("bad") },
+  });
+  const page = await context.newPage();
   await page.goto("/admin/login");
   await page.fill('input[name="email"]', "errado@example.com");
   await page.fill('input[name="password"]', "senha-errada");
-  await page.click('button[type="submit"]');
+  await page.getByRole("button", { name: /entrar/i }).click();
   await expect(page).toHaveURL(/\/admin\/login/);
   await expect(page.getByRole("alert")).toContainText(/credenciais inválidas/i);
+  await context.close();
 });
 
-test("login correto entra e criar post aparece na home", async ({ page }) => {
+test("login correto entra e criar post aparece na home", async ({ browser, baseURL }) => {
   const email = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;
-  test.skip(!email || !password, "ADMIN_EMAIL/ADMIN_PASSWORD necessários");
+  test.skip(!authReady(), "ADMIN_EMAIL/ADMIN_PASSWORD/SESSION_SECRET necessários");
+
+  const context = await browser.newContext({
+    baseURL: baseURL || undefined,
+    extraHTTPHeaders: { "CF-Connecting-IP": uniqueIp("ok") },
+  });
+  const page = await context.newPage();
 
   await page.goto("/admin/login");
   await page.fill('input[name="email"]', email!);
   await page.fill('input[name="password"]', password!);
-  await page.click('button[type="submit"]');
+  await page.getByRole("button", { name: /entrar/i }).click();
   await expect(page).toHaveURL(/\/admin\/?$/);
   await expect(page.getByRole("heading", { name: /^posts$/i })).toBeVisible();
 
@@ -76,11 +99,12 @@ test("login correto entra e criar post aparece na home", async ({ page }) => {
   await page.fill('input[name="excerpt"]', "Resumo do post de QA");
   await page.fill('textarea[name="body"]', "## Olá\n\nCorpo do post de QA.");
   await page.locator('input[name="published"]').check();
-  await page.click('button[type="submit"]');
+  await page.getByRole("button", { name: /criar/i }).click();
   await expect(page).toHaveURL(/\/admin\/edit\//);
 
   await page.goto("/");
   await expect(page.getByRole("heading", { name: title })).toBeVisible();
+  await context.close();
 });
 
 test("sem console error de 5xx na home", async ({ page }) => {

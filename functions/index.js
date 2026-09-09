@@ -37,5 +37,7 @@ export async function onRequestGet(context) {
       ${items}
     </section>`;
 
-  return htmlResponse(page({ title: "Blog — Manager", body }));
+  return htmlResponse(page({ title: "Blog — Manager", body }), 200, {
+    cacheControl: "public, max-age=60",
+  });
 }

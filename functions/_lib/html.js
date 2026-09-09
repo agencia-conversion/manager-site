@@ -8,6 +8,13 @@ export function escapeHtml(s) {
     .replace(/'/g, "&#39;");
 }
 
+/** Form POST de logout (evita CSRF via GET). */
+export function logoutForm() {
+  return `<form class="nav-logout" method="post" action="/admin/logout">
+    <button type="submit">Sair</button>
+  </form>`;
+}
+
 /**
  * @param {{ title: string, body: string, nav?: string }} opts
  */
@@ -50,13 +57,17 @@ export function page({ title, body, nav }) {
 </html>`;
 }
 
-/** @param {string} html */
-export function htmlResponse(html, status = 200) {
+/**
+ * @param {string} html
+ * @param {number} [status]
+ * @param {{ cacheControl?: string }} [opts]
+ */
+export function htmlResponse(html, status = 200, opts = {}) {
   return new Response(html, {
     status,
     headers: {
       "content-type": "text/html; charset=utf-8",
-      "cache-control": "no-store",
+      "cache-control": opts.cacheControl ?? "no-store",
     },
   });
 }
