@@ -1,0 +1,21 @@
+functions/admin/login.js
+  s_e8d11bf70e8a41::t_88da6c269bb00a 3,12-19,64-67,69,73,75,82,85
+functions/_lib/rate-limit.js
+  s_e8d11bf70e8a41::t_b6583494cf10d8 4-11,13-16,21-28,35,39-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "24c620ff2d5e82f31cee52e78ce645e191ace5e6",
+  "prompts": {},
+  "sessions": {
+    "s_e8d11bf70e8a41": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a3f4926d-a2cd-4eaf-964b-1ad835ee1122",
+        "model": "default"
+      },
+      "human_author": "Diego Ivo <diego@conversion.com.br>"
+    }
+  }
+}
