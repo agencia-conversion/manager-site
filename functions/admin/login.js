@@ -1,12 +1,20 @@
 import { authConfigured, createSessionToken, sessionCookieHeader, verifyCredentials } from "../_lib/auth.js";
 import { escapeHtml, htmlResponse, page, redirect } from "../_lib/html.js";
-import { checkLoginRate, clientIp, hitLoginRate } from "../_lib/rate-limit.js";
+import { clearLoginRate, clientIp, consumeLoginAttempt } from "../_lib/rate-limit.js";
 
 function loginNav() {
   return `<nav>
     <a href="/">Blog</a>
     <a href="/manager">Manager</a>
   </nav>`;
+}
+
+/** @param {string} error @param {string} next */
+function loginRedirect(error, next) {
+  const q = new URLSearchParams();
+  q.set("error", error);
+  if (next && next !== "/admin") q.set("next", next);
+  return redirect(`/admin/login?${q}`);
 }
 
 /**
@@ -53,27 +61,28 @@ export async function onRequestPost(context) {
   const { request, env } = context;
   const url = new URL(request.url);
 
-  if (!authConfigured(env)) {
-    return redirect("/admin/login?error=config");
-  }
-
-  const ip = clientIp(request);
-  const rate = await checkLoginRate(env.BLOG, ip);
-  if (!rate.allowed) {
-    return redirect("/admin/login?error=rate");
-  }
-
   const form = await request.formData();
-  const email = String(form.get("email") || "");
-  const password = String(form.get("password") || "");
   const nextRaw = String(form.get("next") || "/admin");
   const next = nextRaw.startsWith("/admin") ? nextRaw : "/admin";
 
-  if (!verifyCredentials(env, email, password)) {
-    await hitLoginRate(env.BLOG, ip);
-    return redirect("/admin/login?error=1");
+  if (!authConfigured(env)) {
+    return loginRedirect("config", next);
   }
 
+  const ip = clientIp(request);
+  const rate = await consumeLoginAttempt(env.BLOG, ip);
+  if (!rate.allowed) {
+    return loginRedirect("rate", next);
+  }
+
+  const email = String(form.get("email") || "");
+  const password = String(form.get("password") || "");
+
+  if (!verifyCredentials(env, email, password)) {
+    return loginRedirect("1", next);
+  }
+
+  await clearLoginRate(env.BLOG, ip);
   const token = await createSessionToken(env, email.trim().toLowerCase());
   return new Response(null, {
     status: 302,
