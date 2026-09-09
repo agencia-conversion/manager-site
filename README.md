@@ -18,15 +18,17 @@ Configure no painel do Cloudflare (preview e prod) e em `.dev.vars` local:
 - `ADMIN_PASSWORD`
 - `SESSION_SECRET`
 
-Binding KV: `BLOG` (namespace separado por ambiente). Os IDs em `wrangler.jsonc` são placeholders — troque pelos namespaces reais ou vincule no dashboard.
+Binding KV: `BLOG` — **vincule no dashboard do Pages** (Settings → Functions → KV namespace bindings), com namespaces separados para preview e produção. O `wrangler.jsonc` não traz IDs de KV (placeholders quebram o deploy).
 
 ## Dev local
 
 ```bash
 cp .dev.vars.example .dev.vars
 # preencha ADMIN_PASSWORD e SESSION_SECRET
-npx wrangler pages dev
+npm run dev
 ```
+
+`npm run dev` sobe `wrangler pages dev` com `--kv=BLOG` (KV local simulada).
 
 ## Testes
 

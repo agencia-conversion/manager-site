@@ -2,7 +2,7 @@
   "name": "manager-site",
   "private": true,
   "scripts": {
-    "dev": "wrangler pages dev",
+    "dev": "wrangler pages dev ./public --kv=BLOG",
     "test": "playwright test"
   },
   "devDependencies": {

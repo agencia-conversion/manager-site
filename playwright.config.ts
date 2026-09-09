@@ -32,7 +32,7 @@ export default defineConfig({
   webServer: preview
     ? undefined
     : {
-        command: "npx wrangler pages dev ./public --port 4173 --ip 127.0.0.1",
+        command: "npx wrangler pages dev ./public --kv=BLOG --port 4173 --ip 127.0.0.1",
         url: local,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
